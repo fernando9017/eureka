@@ -113,6 +113,8 @@ class EurekaApp {
     displayFact(fact, isDaily = false) {
         const card = document.getElementById('factCard');
         const category = CATEGORIES[fact.category];
+        const visual = document.getElementById('factVisual');
+        const img = document.getElementById('factImage');
         
         card.classList.add('animate-out');
         
@@ -124,6 +126,24 @@ class EurekaApp {
             document.getElementById('factDescription').textContent = fact.description;
             document.getElementById('factEra').textContent = fact.era;
             document.getElementById('factLocation').textContent = fact.location;
+            
+            // Load image
+            if (fact.image) {
+                visual.classList.add('loading');
+                img.classList.remove('loaded');
+                
+                const imageUrl = getImageUrl(fact.image);
+                img.onload = () => {
+                    visual.classList.remove('loading');
+                    img.classList.add('loaded');
+                };
+                img.onerror = () => {
+                    visual.classList.remove('loading');
+                    img.classList.remove('loaded');
+                };
+                img.src = imageUrl;
+                img.alt = fact.title;
+            }
             
             const isSaved = this.savedFacts.some(f => f.title === fact.title);
             document.getElementById('saveIcon').textContent = isSaved ? '❤️' : '🤍';
