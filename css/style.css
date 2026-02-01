@@ -1,0 +1,383 @@
+/* 💡 Eureka! - Styles */
+
+:root {
+    --bg: #FFFBF5;
+    --card: #FFFFFF;
+    --text: #1A1A2E;
+    --text-muted: #6B7280;
+    --accent: #F59E0B;
+    --accent-light: #FEF3C7;
+    
+    /* Category colors */
+    --arte: #EC4899;
+    --musica: #8B5CF6;
+    --historia: #F97316;
+    --ciencia: #3B82F6;
+    --cultura: #10B981;
+    --naturaleza: #22C55E;
+    --espacio: #6366F1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-icon {
+    font-size: 1.8rem;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.btn-categories {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 2px solid #E5E7EB;
+    background: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-categories:active {
+    transform: scale(0.95);
+}
+
+/* Categories Panel */
+.categories-panel {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 99;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 0 0 20px 20px;
+}
+
+.categories-panel.open {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+.category-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.75rem 0.5rem;
+    border: 2px solid #E5E7EB;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.category-btn span {
+    font-size: 1.5rem;
+}
+
+.category-btn label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.category-btn.active {
+    background: var(--accent-light);
+    border-color: var(--accent);
+}
+
+.category-btn:active {
+    transform: scale(0.95);
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+}
+
+.card-container {
+    width: 100%;
+    perspective: 1000px;
+}
+
+/* Fact Card */
+.card {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.card:active {
+    transform: scale(0.98);
+}
+
+.card.animate-out {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.card.animate-in {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Category colors on card */
+.card[data-category="arte"] { border-color: var(--arte); }
+.card[data-category="musica"] { border-color: var(--musica); }
+.card[data-category="historia"] { border-color: var(--historia); }
+.card[data-category="ciencia"] { border-color: var(--ciencia); }
+.card[data-category="cultura"] { border-color: var(--cultura); }
+.card[data-category="naturaleza"] { border-color: var(--naturaleza); }
+.card[data-category="espacio"] { border-color: var(--espacio); }
+
+.card-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    background: var(--accent-light);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.card[data-category="arte"] .card-category { background: #FCE7F3; }
+.card[data-category="musica"] .card-category { background: #EDE9FE; }
+.card[data-category="historia"] .card-category { background: #FFEDD5; }
+.card[data-category="ciencia"] .card-category { background: #DBEAFE; }
+.card[data-category="cultura"] .card-category { background: #D1FAE5; }
+.card[data-category="naturaleza"] .card-category { background: #DCFCE7; }
+.card[data-category="espacio"] .card-category { background: #E0E7FF; }
+
+.category-icon {
+    font-size: 1rem;
+}
+
+.category-name {
+    font-weight: 500;
+    color: var(--text);
+}
+
+.card-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    margin-bottom: 1rem;
+}
+
+.visual-emoji {
+    font-size: 5rem;
+    line-height: 1;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.card-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.card-meta {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.meta-tag {
+    padding: 0.3rem 0.6rem;
+    background: #F3F4F6;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.swipe-hint {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Footer */
+.footer {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    background: var(--bg);
+}
+
+.action-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.75rem;
+    border: 2px solid #E5E7EB;
+    border-radius: 16px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+.action-btn span {
+    font-size: 1.3rem;
+}
+
+.action-btn label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.action-btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.action-btn.primary label {
+    color: white;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--text);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 380px) {
+    .card-title { font-size: 1.2rem; }
+    .visual-emoji { font-size: 4rem; }
+    .categories-grid { grid-template-columns: repeat(4, 1fr); gap: 0.3rem; }
+    .category-btn { padding: 0.5rem 0.25rem; }
+    .category-btn span { font-size: 1.2rem; }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0F0F1A;
+        --card: #1A1A2E;
+        --text: #FFFFFF;
+        --text-muted: #9CA3AF;
+    }
+    
+    .btn-categories,
+    .category-btn,
+    .action-btn {
+        background: var(--card);
+        border-color: #374151;
+    }
+    
+    .categories-panel {
+        background: var(--card);
+    }
+    
+    .meta-tag {
+        background: #374151;
+    }
+    
+    .card-category {
+        background: rgba(245, 158, 11, 0.2);
+    }
+}

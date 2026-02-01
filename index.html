@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>💡 Eureka! - Alimenta tu curiosidad</title>
+    
+    <meta name="description" content="Descubre datos fascinantes de arte, ciencia, historia y más. Una dosis diaria de curiosidad.">
+    <meta property="og:title" content="💡 Eureka! - Alimenta tu curiosidad">
+    <meta property="og:description" content="Datos increíbles que no sabías. Arte, ciencia, historia, música y más.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">💡</span>
+                <span class="logo-text">Eureka!</span>
+            </div>
+            <button class="btn-categories" id="btnCategories" onclick="app.toggleCategories()">
+                <span id="currentCategoryIcon">🎲</span>
+            </button>
+        </header>
+
+        <!-- Categories Panel -->
+        <div class="categories-panel" id="categoriesPanel">
+            <div class="categories-grid">
+                <button class="category-btn active" data-category="all" onclick="app.setCategory('all')">
+                    <span>🎲</span>
+                    <label>Todos</label>
+                </button>
+                <button class="category-btn" data-category="arte" onclick="app.setCategory('arte')">
+                    <span>🎨</span>
+                    <label>Arte</label>
+                </button>
+                <button class="category-btn" data-category="musica" onclick="app.setCategory('musica')">
+                    <span>🎵</span>
+                    <label>Música</label>
+                </button>
+                <button class="category-btn" data-category="historia" onclick="app.setCategory('historia')">
+                    <span>📜</span>
+                    <label>Historia</label>
+                </button>
+                <button class="category-btn" data-category="ciencia" onclick="app.setCategory('ciencia')">
+                    <span>🔬</span>
+                    <label>Ciencia</label>
+                </button>
+                <button class="category-btn" data-category="cultura" onclick="app.setCategory('cultura')">
+                    <span>🌍</span>
+                    <label>Cultura</label>
+                </button>
+                <button class="category-btn" data-category="naturaleza" onclick="app.setCategory('naturaleza')">
+                    <span>🌿</span>
+                    <label>Naturaleza</label>
+                </button>
+                <button class="category-btn" data-category="espacio" onclick="app.setCategory('espacio')">
+                    <span>🚀</span>
+                    <label>Espacio</label>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Card -->
+        <main class="main">
+            <div class="card-container">
+                <div class="card" id="factCard">
+                    <div class="card-category" id="factCategory">
+                        <span class="category-icon" id="factCategoryIcon">🎨</span>
+                        <span class="category-name" id="factCategoryName">Arte</span>
+                    </div>
+                    
+                    <div class="card-visual" id="factVisual">
+                        <span class="visual-emoji" id="factEmoji">🖼️</span>
+                    </div>
+                    
+                    <h1 class="card-title" id="factTitle">Cargando...</h1>
+                    
+                    <p class="card-description" id="factDescription">
+                        Descubre datos fascinantes sobre arte, ciencia, historia y más.
+                    </p>
+                    
+                    <div class="card-meta" id="factMeta">
+                        <span class="meta-tag" id="factEra"></span>
+                        <span class="meta-tag" id="factLocation"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="swipe-hint">
+                <span>👆</span> Toca para otro dato
+            </p>
+        </main>
+
+        <!-- Bottom Actions -->
+        <footer class="footer">
+            <button class="action-btn" onclick="app.share()">
+                <span>📤</span>
+                <label>Compartir</label>
+            </button>
+            <button class="action-btn primary" onclick="app.nextFact()">
+                <span>💡</span>
+                <label>Otro dato</label>
+            </button>
+            <button class="action-btn" onclick="app.save()">
+                <span id="saveIcon">🤍</span>
+                <label>Guardar</label>
+            </button>
+        </footer>
+    </div>
+
+    <!-- Saved Toast -->
+    <div class="toast" id="toast">¡Guardado!</div>
+
+    <script src="js/facts.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
