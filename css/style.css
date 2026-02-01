@@ -68,6 +68,26 @@ body {
     color: var(--text);
 }
 
+.header-stats {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.stat-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.4rem 0.6rem;
+    background: var(--accent-light);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.stat-badge span:first-child {
+    font-size: 0.9rem;
+}
+
 .btn-categories {
     width: 44px;
     height: 44px;
@@ -196,6 +216,18 @@ body {
 .card[data-category="cultura"] { border-color: var(--cultura); }
 .card[data-category="naturaleza"] { border-color: var(--naturaleza); }
 .card[data-category="espacio"] { border-color: var(--espacio); }
+
+/* Daily fact special styling */
+.card.daily {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, var(--card), var(--accent-light));
+    box-shadow: 0 4px 30px rgba(245, 158, 11, 0.2);
+}
+
+.card.daily .card-category {
+    background: var(--accent);
+    color: white;
+}
 
 .card-category {
     display: inline-flex;

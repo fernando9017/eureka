@@ -458,3 +458,208 @@ const CATEGORIES = {
     naturaleza: { name: "Naturaleza", icon: "🌿" },
     espacio: { name: "Espacio", icon: "🚀" }
 };
+
+// === 🆕 NUEVOS DATOS v2 ===
+
+const FACTS_V2 = [
+    // MÁS ARTE
+    {
+        category: "arte",
+        emoji: "🎪",
+        title: "Salvador Dalí pagaba en restaurantes con dibujos",
+        description: "Hacía dibujos en los cheques sabiendo que nadie los cobraría porque valían más como arte. Comía gratis toda su vida.",
+        era: "Siglo XX",
+        location: "España"
+    },
+    {
+        category: "arte",
+        emoji: "🖼️",
+        title: "El Grito de Munch ha sido robado dos veces",
+        description: "Fue robado en 1994 y 2004. En el primer robo, los ladrones dejaron una nota: 'Gracias por la pobre seguridad'.",
+        era: "Siglo XX",
+        location: "Noruega"
+    },
+    
+    // MÁS CIENCIA
+    {
+        category: "ciencia",
+        emoji: "🧲",
+        title: "Tu cuerpo tiene suficiente hierro para hacer un clavo",
+        description: "El cuerpo humano promedio contiene 3-4 gramos de hierro, suficiente para fabricar un clavo de 7 centímetros.",
+        era: "Contemporáneo",
+        location: "Global"
+    },
+    {
+        category: "ciencia",
+        emoji: "🦴",
+        title: "Nacemos con 300 huesos, morimos con 206",
+        description: "Muchos huesos se fusionan durante el crecimiento. Por eso los bebés son más flexibles que los adultos.",
+        era: "Contemporáneo",
+        location: "Global"
+    },
+    {
+        category: "ciencia",
+        emoji: "💧",
+        title: "El agua caliente se congela más rápido que la fría",
+        description: "Se llama Efecto Mpemba. Aunque suena ilógico, bajo ciertas condiciones el agua caliente se congela primero.",
+        era: "Siglo XX",
+        location: "Tanzania"
+    },
+    {
+        category: "ciencia",
+        emoji: "🌈",
+        title: "Los colores no existen realmente",
+        description: "El color es solo la interpretación de tu cerebro de diferentes longitudes de onda de luz. Los objetos no 'tienen' color.",
+        era: "Contemporáneo",
+        location: "Global"
+    },
+    
+    // MÁS HISTORIA
+    {
+        category: "historia",
+        emoji: "🗡️",
+        title: "Los samurái podían matar legalmente por un insulto",
+        description: "Tenían el derecho de 'kiri-sute gomen': cortar y abandonar. Podían matar a cualquier plebeyo que los insultara.",
+        era: "Japón Feudal",
+        location: "Japón"
+    },
+    {
+        category: "historia",
+        emoji: "🏴‍☠️",
+        title: "Los piratas usaban aretes por una razón práctica",
+        description: "Creían que el oro mejoraba la vista. También servía para pagar su funeral si morían en el mar.",
+        era: "Siglo XVII",
+        location: "Caribe"
+    },
+    {
+        category: "historia",
+        emoji: "🎩",
+        title: "Abraham Lincoln guardaba documentos en su sombrero",
+        description: "Su icónico sombrero de copa era básicamente su maletín. Guardaba cartas, discursos y billetes ahí.",
+        era: "Siglo XIX",
+        location: "Estados Unidos"
+    },
+    {
+        category: "historia",
+        emoji: "🏛️",
+        title: "El Coliseo tenía un techo retráctil",
+        description: "El 'velarium' era una enorme lona operada por marineros que protegía a 50,000 espectadores del sol.",
+        era: "Imperio Romano",
+        location: "Italia"
+    },
+    
+    // MÁS MÚSICA
+    {
+        category: "musica",
+        emoji: "🎸",
+        title: "Jimi Hendrix no sabía leer música",
+        description: "Uno de los mejores guitarristas de la historia era completamente autodidacta. Tocaba de oído.",
+        era: "Siglo XX",
+        location: "Estados Unidos"
+    },
+    {
+        category: "musica",
+        emoji: "🎵",
+        title: "La canción más cara de la historia costó 14 millones",
+        description: "'Smooth Criminal' de Michael Jackson. El video con efectos especiales y coreografía costó una fortuna.",
+        era: "Siglo XX",
+        location: "Estados Unidos"
+    },
+    
+    // MÁS CULTURA
+    {
+        category: "cultura",
+        emoji: "🍫",
+        title: "El chocolate era moneda en Mesoamérica",
+        description: "Los aztecas usaban granos de cacao como dinero. 100 granos = 1 esclavo. El chocolate era para la élite.",
+        era: "Prehispánico",
+        location: "México"
+    },
+    {
+        category: "cultura",
+        emoji: "💤",
+        title: "En España la siesta es patrimonio cultural",
+        description: "La palabra 'siesta' viene de 'hora sexta' (mediodía romano). Está científicamente probado que mejora la productividad.",
+        era: "Contemporáneo",
+        location: "España"
+    },
+    {
+        category: "cultura",
+        emoji: "🎭",
+        title: "En Finlandia hay competencia de cargar esposas",
+        description: "El ganador recibe el peso de su esposa en cerveza. Es un deporte oficial desde 1992.",
+        era: "Contemporáneo",
+        location: "Finlandia"
+    },
+    
+    // MÁS NATURALEZA
+    {
+        category: "naturaleza",
+        emoji: "🦑",
+        title: "El calamar gigante tiene el ojo más grande del mundo",
+        description: "Sus ojos miden 27 cm de diámetro, del tamaño de un balón de fútbol. Pueden ver en la oscuridad total.",
+        era: "Contemporáneo",
+        location: "Océanos"
+    },
+    {
+        category: "naturaleza",
+        emoji: "🐌",
+        title: "Los caracoles pueden dormir 3 años seguidos",
+        description: "Cuando el clima no es favorable, entran en hibernación. Pueden sobrevivir sin comer durante ese tiempo.",
+        era: "Contemporáneo",
+        location: "Global"
+    },
+    {
+        category: "naturaleza",
+        emoji: "🦎",
+        title: "Los camaleones no cambian de color para camuflarse",
+        description: "Cambian según su temperatura, luz y estado de ánimo. El camuflaje es solo un efecto secundario.",
+        era: "Contemporáneo",
+        location: "África"
+    },
+    {
+        category: "naturaleza",
+        emoji: "🐝",
+        title: "Las abejas pueden reconocer rostros humanos",
+        description: "Usan la misma técnica que nosotros: identifican la configuración de ojos, nariz y boca como un patrón.",
+        era: "Contemporáneo",
+        location: "Global"
+    },
+    
+    // MÁS ESPACIO
+    {
+        category: "espacio",
+        emoji: "🌑",
+        title: "Hay un lado de la Luna que nunca vemos",
+        description: "La Luna siempre muestra la misma cara a la Tierra debido a la rotación sincrónica. El 'lado oscuro' recibe la misma luz.",
+        era: "Contemporáneo",
+        location: "Sistema Solar"
+    },
+    {
+        category: "espacio",
+        emoji: "🔭",
+        title: "Hay más árboles en la Tierra que estrellas en la Vía Láctea",
+        description: "Hay aproximadamente 3 billones de árboles vs 100-400 mil millones de estrellas en nuestra galaxia.",
+        era: "Contemporáneo",
+        location: "Tierra"
+    },
+    {
+        category: "espacio",
+        emoji: "🌌",
+        title: "El espacio huele a carne quemada y metal",
+        description: "Astronautas reportan un olor distintivo en sus trajes. Se cree que es por estrellas moribundas cercanas.",
+        era: "Contemporáneo",
+        location: "Espacio"
+    },
+    {
+        category: "espacio",
+        emoji: "🛰️",
+        title: "Hay un Tesla flotando en el espacio",
+        description: "Elon Musk lanzó su Tesla Roadster rojo en 2018. Starman, el maniquí al volante, orbita el Sol.",
+        era: "Siglo XXI",
+        location: "Órbita Solar"
+    }
+];
+
+// Merge arrays
+FACTS.push(...FACTS_V2);

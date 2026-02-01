@@ -1,4 +1,4 @@
-// 💡 Eureka! - App Logic
+// 💡 Eureka! v2.0 - App Logic
 
 class EurekaApp {
     constructor() {
@@ -6,12 +6,51 @@ class EurekaApp {
         this.currentFact = null;
         this.viewedFacts = new Set();
         this.savedFacts = JSON.parse(localStorage.getItem('eureka-saved') || '[]');
+        this.stats = JSON.parse(localStorage.getItem('eureka-stats') || '{"totalViewed":0,"streak":0,"lastVisit":null}');
         this.init();
     }
     
     init() {
-        this.nextFact();
+        this.updateStreak();
+        this.showDailyFact();
         this.setupSwipe();
+        this.updateStatsUI();
+    }
+    
+    updateStreak() {
+        const today = new Date().toDateString();
+        const lastVisit = this.stats.lastVisit;
+        
+        if (lastVisit) {
+            const lastDate = new Date(lastVisit);
+            const diffDays = Math.floor((new Date(today) - lastDate) / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 1) {
+                // Consecutive day
+                this.stats.streak++;
+            } else if (diffDays > 1) {
+                // Streak broken
+                this.stats.streak = 1;
+            }
+            // Same day = no change
+        } else {
+            this.stats.streak = 1;
+        }
+        
+        if (this.stats.lastVisit !== today) {
+            this.stats.lastVisit = today;
+            this.saveStats();
+        }
+    }
+    
+    showDailyFact() {
+        // Get consistent "fact of the day" based on date
+        const today = new Date();
+        const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+        const factIndex = dayOfYear % FACTS.length;
+        
+        this.currentFact = FACTS[factIndex];
+        this.displayFact(this.currentFact, true);
     }
     
     setupSwipe() {
@@ -27,15 +66,13 @@ class EurekaApp {
             const endX = e.changedTouches[0].clientX;
             const endY = e.changedTouches[0].clientY;
             const diffX = startX - endX;
-            const diffY = Math.abs(startY - e.changedTouches[0].clientY);
+            const diffY = Math.abs(startY - endY);
             
-            // Horizontal swipe
             if (Math.abs(diffX) > 50 && diffY < 100) {
                 this.nextFact();
             }
         });
         
-        // Click on card
         card.addEventListener('click', () => this.nextFact());
     }
     
@@ -49,12 +86,10 @@ class EurekaApp {
     nextFact() {
         const facts = this.getFilteredFacts();
         
-        // Reset viewed if we've seen all
         if (this.viewedFacts.size >= facts.length) {
             this.viewedFacts.clear();
         }
         
-        // Get random unviewed fact
         let availableFacts = facts.filter((_, i) => !this.viewedFacts.has(facts.indexOf(_)));
         if (availableFacts.length === 0) {
             availableFacts = facts;
@@ -67,45 +102,56 @@ class EurekaApp {
         this.currentFact = fact;
         this.viewedFacts.add(FACTS.indexOf(fact));
         
+        // Update stats
+        this.stats.totalViewed++;
+        this.saveStats();
+        this.updateStatsUI();
+        
         this.displayFact(fact);
     }
     
-    displayFact(fact) {
+    displayFact(fact, isDaily = false) {
         const card = document.getElementById('factCard');
         const category = CATEGORIES[fact.category];
         
-        // Animate out
         card.classList.add('animate-out');
         
         setTimeout(() => {
-            // Update content
             document.getElementById('factCategoryIcon').textContent = category.icon;
-            document.getElementById('factCategoryName').textContent = category.name;
+            document.getElementById('factCategoryName').textContent = isDaily ? '✨ Dato del Día' : category.name;
             document.getElementById('factEmoji').textContent = fact.emoji;
             document.getElementById('factTitle').textContent = fact.title;
             document.getElementById('factDescription').textContent = fact.description;
             document.getElementById('factEra').textContent = fact.era;
             document.getElementById('factLocation').textContent = fact.location;
             
-            // Update save icon
             const isSaved = this.savedFacts.some(f => f.title === fact.title);
             document.getElementById('saveIcon').textContent = isSaved ? '❤️' : '🤍';
             
-            // Set category color
             card.dataset.category = fact.category;
+            if (isDaily) card.classList.add('daily');
+            else card.classList.remove('daily');
             
-            // Animate in
             card.classList.remove('animate-out');
             card.classList.add('animate-in');
             
-            setTimeout(() => {
-                card.classList.remove('animate-in');
-            }, 300);
+            setTimeout(() => card.classList.remove('animate-in'), 300);
             
-            // Vibrate
             if (navigator.vibrate) navigator.vibrate(30);
             
         }, 150);
+    }
+    
+    updateStatsUI() {
+        const streakEl = document.getElementById('streakCount');
+        const viewedEl = document.getElementById('viewedCount');
+        
+        if (streakEl) streakEl.textContent = this.stats.streak;
+        if (viewedEl) viewedEl.textContent = this.stats.totalViewed;
+    }
+    
+    saveStats() {
+        localStorage.setItem('eureka-stats', JSON.stringify(this.stats));
     }
     
     toggleCategories() {
@@ -117,14 +163,12 @@ class EurekaApp {
         this.currentCategory = category;
         this.viewedFacts.clear();
         
-        // Update UI
         document.querySelectorAll('.category-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.category === category);
         });
         
         document.getElementById('currentCategoryIcon').textContent = CATEGORIES[category].icon;
         
-        // Close panel and get new fact
         this.toggleCategories();
         this.nextFact();
     }
@@ -135,12 +179,10 @@ class EurekaApp {
         const index = this.savedFacts.findIndex(f => f.title === this.currentFact.title);
         
         if (index > -1) {
-            // Remove from saved
             this.savedFacts.splice(index, 1);
             document.getElementById('saveIcon').textContent = '🤍';
             this.showToast('Eliminado de guardados');
         } else {
-            // Add to saved
             this.savedFacts.push(this.currentFact);
             document.getElementById('saveIcon').textContent = '❤️';
             this.showToast('¡Guardado! 💡');
@@ -155,7 +197,7 @@ class EurekaApp {
         if (!this.currentFact) return;
         
         const fact = this.currentFact;
-        const text = `💡 ¿Sabías que...\n\n${fact.title}\n\n${fact.description}\n\n✨ Descubre más en Eureka!\n👉 https://fernando9017.github.io/eureka/`;
+        const text = `💡 ¿Sabías que...\n\n${fact.title}\n\n${fact.description}\n\n✨ Descubre más datos increíbles:\n👉 https://fernando9017.github.io/eureka/`;
         
         if (navigator.share) {
             navigator.share({
